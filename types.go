@@ -8,7 +8,7 @@ type MyComplexTypeMiejscowosc struct {
 
 // IsSpec ensures that the coordinates of a location are specified.
 func (c MyComplexTypeMiejscowosc) IsSpec() bool {
-	return c.X != 0 && c.Y != 0
+	return c.X != 0 || c.Y != 0
 }
 
 // MyComplexTypeBurza represents information about a number of lightnings
@@ -21,26 +21,26 @@ type MyComplexTypeBurza struct {
 
 // MyComplexTypeOstrzezenia represents information about wheater MyComplexTypeOstrzezenia for the given location
 type MyComplexTypeOstrzezenia struct {
-	Od_dnia       string
-	Do_dnia       string
-	Mroz          int
-	Mroz_od_dnia  string
-	Mroz_do_dnia  string
-	Upal          int
-	Upal_od_dnia  string
-	Upal_do_dnia  string
-	Wiatr         int
-	Wiatr_od_dnia string
-	Wiatr_do_dnia string
-	Opad          int
-	Opad_od_dnia  string
-	Opad_do_dnia  string
-	Burza         int
-	Burza_od_dnia string
-	Burza_do_dnia string
-	Traba         int
-	Traba_od_dnia string
-	Traba_do_dnia string
+	OdDnia      string
+	DoDnia      string
+	Mroz        int
+	MrozOdDnia  string
+	MrozDoDnia  string
+	Upal        int
+	UpalOdDnia  string
+	UpalDoDnia  string
+	Wiatr       int
+	WiatrOdDnia string
+	WiatrDoDnia string
+	Opad        int
+	OpadOdDnia  string
+	OpadDoDnia  string
+	Burza       int
+	BurzaOdDnia string
+	BurzaDoDnia string
+	Traba       int
+	TrabaOdDnia string
+	TrabaDoDnia string
 }
 
 // IsSafe returns true when no MyComplexTypeOstrzezenias were registered otherwise it resturns false

@@ -229,85 +229,85 @@ func parseMyComplexTypeOstrzezenia(response []byte) MyComplexTypeOstrzezenia {
 				var err error
 
 				switch last {
-				case "od_dnia":
+				case "odDnia":
 					{
-						MyComplexTypeOstrzezenia.Od_dnia = string(se)
+						MyComplexTypeOstrzezenia.OdDnia = string(se)
 					}
-				case "do_dnia":
+				case "doDnia":
 					{
-						MyComplexTypeOstrzezenia.Do_dnia = string(se)
+						MyComplexTypeOstrzezenia.DoDnia = string(se)
 					}
 				case "mroz":
 					{
 						MyComplexTypeOstrzezenia.Mroz, err = strconv.Atoi(string(se))
 					}
-				case "mroz_od_dnia":
+				case "mrozOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Mroz_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.MrozOdDnia = string(se)
 					}
-				case "mroz_do_dnia":
+				case "mrozDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Mroz_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.MrozDoDnia = string(se)
 					}
 				case "upal":
 					{
 						MyComplexTypeOstrzezenia.Upal, err = strconv.Atoi(string(se))
 					}
-				case "upal_od_dnia":
+				case "upalOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Upal_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.UpalOdDnia = string(se)
 					}
-				case "upal_do_dnia":
+				case "upalDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Upal_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.UpalDoDnia = string(se)
 					}
 				case "wiatr":
 					{
 						MyComplexTypeOstrzezenia.Wiatr, err = strconv.Atoi(string(se))
 					}
-				case "wiatr_od_dnia":
+				case "wiatrOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Wiatr_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.WiatrOdDnia = string(se)
 					}
-				case "wiatr_do_dnia":
+				case "wiatrDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Wiatr_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.WiatrDoDnia = string(se)
 					}
 				case "opad":
 					{
 						MyComplexTypeOstrzezenia.Opad, err = strconv.Atoi(string(se))
 					}
-				case "opad_od_dnia":
+				case "opadOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Opad_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.OpadOdDnia = string(se)
 					}
-				case "opad_do_dnia":
+				case "opadDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Opad_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.OpadDoDnia = string(se)
 					}
 				case "burza":
 					{
 						MyComplexTypeOstrzezenia.Burza, err = strconv.Atoi(string(se))
 					}
-				case "burza_od_dnia":
+				case "burzaOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Burza_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.BurzaOdDnia = string(se)
 					}
-				case "burza_do_dnia":
+				case "burzaDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Burza_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.BurzaDoDnia = string(se)
 					}
 				case "traba":
 					{
 						MyComplexTypeOstrzezenia.Traba, err = strconv.Atoi(string(se))
 					}
-				case "traba_od_dnia":
+				case "trabaOdDnia":
 					{
-						MyComplexTypeOstrzezenia.Traba_od_dnia = string(se)
+						MyComplexTypeOstrzezenia.TrabaOdDnia = string(se)
 					}
-				case "traba_do_dnia":
+				case "trabaDoDnia":
 					{
-						MyComplexTypeOstrzezenia.Traba_do_dnia = string(se)
+						MyComplexTypeOstrzezenia.TrabaDoDnia = string(se)
 					}
 				}
 
