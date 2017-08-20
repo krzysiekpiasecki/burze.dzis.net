@@ -4,30 +4,30 @@ import "testing"
 import "fmt"
 
 func TestMyComplexTypeMiejscowosc_IsSpec(t *testing.T) {
-	crds := []MyComplexTypeMiejscowosc{
+	msc := []myComplexTypeMiejscowosc{
 		{X: 51.02, Y: 17.02},
 		{X: 0.0, Y: 12.34},
 	}
-	for _, v := range crds {
+	for _, v := range msc {
 		if v.IsSpec() == false {
-			t.Fatalf("MyComplexTypeMiejscowosc{%f, %f}.isSpec() returned true - expected false", v.X, v.Y)
+			t.Fatalf("myComplexTypeMiejscowosc{%f, %f}.isSpec() returned true - expected false", v.X, v.Y)
 		}
 	}
 }
 
 func TestMyComplexTypeMiejscowosc_IsSpec2(t *testing.T) {
-	crds := []MyComplexTypeMiejscowosc{
-		MyComplexTypeMiejscowosc{X: 0, Y: 0},
+	crds := []myComplexTypeMiejscowosc{
+		myComplexTypeMiejscowosc{X: 0, Y: 0},
 	}
 	for _, v := range crds {
 		if v.IsSpec() == true {
-			t.Fatalf("MyComplexTypeMiejscowosc{%f, %f}.isSpec() returned false - expected true", v.X, v.Y)
+			t.Fatalf("myComplexTypeMiejscowosc{%f, %f}.isSpec() returned false - expected true", v.X, v.Y)
 		}
 	}
 }
 
 func TestMyComplexTypeOstrzezenia_IsSafe(t *testing.T) {
-	warns := []MyComplexTypeOstrzezenia{
+	warns := []myComplexTypeOstrzezenia{
 		{Mroz: 1},
 		{Upal: 1},
 		{Wiatr: 1},
@@ -42,20 +42,20 @@ func TestMyComplexTypeOstrzezenia_IsSafe(t *testing.T) {
 }
 
 func TestMyComplexTypeOstrzezenia_IsSafe2(t *testing.T) {
-	warn := MyComplexTypeOstrzezenia{}
+	warn := myComplexTypeOstrzezenia{}
 	if warn.IsSafe() == false {
 		t.Fatalf("%v.isSafe() returned false - expected true", warn)
 	}
 }
 
 func ExampleMyComplexTypeMiejscowosc_IsSpec() {
-	l := MyComplexTypeMiejscowosc{0, 0}
+	l := myComplexTypeMiejscowosc{0, 0}
 	fmt.Print(l.IsSpec())
 	// Output: false
 }
 
 func ExampleMyComplexTypeMiejscowosc_IsSpec_second() {
-	l := MyComplexTypeMiejscowosc{52.07, 12.25}
+	l := myComplexTypeMiejscowosc{52.07, 12.25}
 	fmt.Print(l.IsSpec())
 	// Output: true
 }

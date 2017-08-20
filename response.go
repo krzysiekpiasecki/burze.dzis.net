@@ -81,12 +81,12 @@ func parseAuth(response []byte) bool {
 	panic("Parsing SOAP response failure")
 }
 
-func parseLocation(response []byte) MyComplexTypeMiejscowosc {
+func parseLocation(response []byte) myComplexTypeMiejscowosc {
 
 	xmlDecoder := xml.NewDecoder(bytes.NewReader(response))
 
 	last := ""
-	loc := MyComplexTypeMiejscowosc{}
+	loc := myComplexTypeMiejscowosc{}
 
 	for {
 		tok, err := xmlDecoder.Token()
@@ -117,14 +117,14 @@ func parseLocation(response []byte) MyComplexTypeMiejscowosc {
 					last = ""
 					loc.X, err = strconv.ParseFloat(string(se), 64)
 					if err != nil {
-						panic("Invalid externa data when parsing x MyComplexTypeMiejscowosc")
+						panic("Invalid externa data when parsing x myComplexTypeMiejscowosc")
 					}
 				}
 				if last == "y" {
 					last = ""
 					loc.Y, err = strconv.ParseFloat(string(se), 64)
 					if err != nil {
-						panic("Invalid externa data when parsing y MyComplexTypeMiejscowosc")
+						panic("Invalid externa data when parsing y myComplexTypeMiejscowosc")
 					}
 				}
 
@@ -136,12 +136,12 @@ func parseLocation(response []byte) MyComplexTypeMiejscowosc {
 
 }
 
-func parseMyComplexTypeBurza(response []byte) MyComplexTypeBurza {
+func parseMyComplexTypeBurza(response []byte) myComplexTypeBurza {
 
 	xmlDecoder := xml.NewDecoder(bytes.NewReader(response))
 
 	last := ""
-	MyComplexTypeBurza := MyComplexTypeBurza{}
+	MyComplexTypeBurza := myComplexTypeBurza{}
 
 	for {
 		tok, err := xmlDecoder.Token()
@@ -189,7 +189,7 @@ func parseMyComplexTypeBurza(response []byte) MyComplexTypeBurza {
 
 				last = ""
 				if err != nil {
-					panic("Invalid external data when parsing x MyComplexTypeMiejscowosc")
+					panic("Invalid external data when parsing x myComplexTypeMiejscowosc")
 				}
 			}
 		}
@@ -199,12 +199,12 @@ func parseMyComplexTypeBurza(response []byte) MyComplexTypeBurza {
 
 }
 
-func parseMyComplexTypeOstrzezenia(response []byte) MyComplexTypeOstrzezenia {
+func parseMyComplexTypeOstrzezenia(response []byte) myComplexTypeOstrzezenia {
 
 	xmlDecoder := xml.NewDecoder(bytes.NewReader(response))
 
 	last := ""
-	MyComplexTypeOstrzezenia := MyComplexTypeOstrzezenia{}
+	MyComplexTypeOstrzezenia := myComplexTypeOstrzezenia{}
 
 	for {
 		tok, err := xmlDecoder.Token()
@@ -313,7 +313,7 @@ func parseMyComplexTypeOstrzezenia(response []byte) MyComplexTypeOstrzezenia {
 
 				last = ""
 				if err != nil {
-					panic("Invalid external data when parsing x MyComplexTypeMiejscowosc")
+					panic("Invalid external data when parsing x myComplexTypeMiejscowosc")
 				}
 			}
 		}
