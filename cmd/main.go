@@ -64,21 +64,21 @@ func locateCmd(args *locateCmdArgs) cmd {
 }
 
 func MyComplexTypeOstrzezeniaCmd(args *MyComplexTypeOstrzezeniaCmdArgs) cmd {
-	fs := flag.NewFlagSet("MyComplexTypeOstrzezenia", flag.ExitOnError)
+	fs := flag.NewFlagSet("myComplexTypeOstrzezenia", flag.ExitOnError)
 	fs.StringVar(&(*args).apikey, "apikey", "", "Personal key to access a burzedzisnet API")
 	fs.StringVar(&(*args).name, "name", "", "Location name")
-	fs.Float64Var(&(*args).x, "x", 0, "MyComplexTypeMiejscowosc x of MyComplexTypeMiejscowosc")
-	fs.Float64Var(&(*args).y, "y", 0, "MyComplexTypeMiejscowosc y of MyComplexTypeMiejscowosc")
+	fs.Float64Var(&(*args).x, "x", 0, "myComplexTypeMiejscowosc x of myComplexTypeMiejscowosc")
+	fs.Float64Var(&(*args).y, "y", 0, "myComplexTypeMiejscowosc y of myComplexTypeMiejscowosc")
 	c := cmd{"MyComplexTypeOstrzezenias", fs}
 	return c
 }
 
 func MyComplexTypeBurzaCmd(args *MyComplexTypeBurzaCmdArgs) cmd {
-	fs := flag.NewFlagSet("MyComplexTypeBurza", flag.ExitOnError)
+	fs := flag.NewFlagSet("myComplexTypeBurza", flag.ExitOnError)
 	fs.StringVar(&(*args).apikey, "apikey", "", "Personal key to access a burzedzisnet API")
 	fs.StringVar(&(*args).location, "location", "", "Location name")
-	fs.Float64Var(&(*args).x, "x", 0, "MyComplexTypeMiejscowosc x of MyComplexTypeMiejscowosc")
-	fs.Float64Var(&(*args).y, "y", 0, "MyComplexTypeMiejscowosc y of MyComplexTypeMiejscowosc")
+	fs.Float64Var(&(*args).x, "x", 0, "myComplexTypeMiejscowosc x of myComplexTypeMiejscowosc")
+	fs.Float64Var(&(*args).y, "y", 0, "myComplexTypeMiejscowosc y of myComplexTypeMiejscowosc")
 	fs.IntVar(&(*args).radius, "radius", 0, "The radius covered by point, optional. Default is 25 km.")
 	c := cmd{"search", fs}
 	return c

@@ -5,82 +5,65 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"text/template"
 )
 
-// AuthReqParams represents
-type AuthReqParams struct {
+type transf interface {
+	transf(m *map[string]string)
+}
+
+func ptransf(t transf) map[string]string {
+	m := make(map[string]string)
+	t.transf(&m)
+	return m
+}
+
+// authReqParams represents
+type authReqParams struct {
 	apikey string
 }
 
-// LocationReqParams represents
-type LocationReqParams struct {
+func (p authReqParams) transf(m *map[string]string) {
+	(*m)["apikey"] = p.apikey
+}
+
+// myComplexTypeMiejscowoscReqParams represents
+type myComplexTypeMiejscowoscReqParams struct {
 	apikey string
 	name   string
 }
 
-// MyComplexTypeBurzaReqParams represents
-type MyComplexTypeBurzaReqParams struct {
+func (p myComplexTypeMiejscowoscReqParams) transf(m *map[string]string) {
+	(*m)["apikey"] = p.apikey
+	(*m)["name"] = p.name
+}
+
+// myComplexTypeBurzaReqParams represents
+type myComplexTypeBurzaReqParams struct {
 	x      float64
 	y      float64
 	radius int
 	apikey string
 }
 
-// MyComplexTypeOstrzezeniaReqParams represents
-type MyComplexTypeOstrzezeniaReqParams struct {
-	x      float64
-	y      float64
-	apikey string
-}
-
-func (p AuthReqParams) print(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
-}
-
-func (p LocationReqParams) print(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
-	(*m)["name"] = p.name
-}
-
-func (p MyComplexTypeBurzaReqParams) print(m *map[string]string) {
+func (p myComplexTypeBurzaReqParams) transf(m *map[string]string) {
 	(*m)["apikey"] = p.apikey
 	(*m)["x"] = strconv.FormatFloat(p.x, 'f', 2, 64)
 	(*m)["y"] = strconv.FormatFloat(p.y, 'f', 2, 64)
 	(*m)["radius"] = strconv.FormatInt(int64(p.radius), 10)
 }
 
-func (p MyComplexTypeOstrzezeniaReqParams) print(m *map[string]string) {
+// myComplexTypeOstrzezeniaReqParams represents
+type myComplexTypeOstrzezeniaReqParams struct {
+	x      float64
+	y      float64
+	apikey string
+}
+
+func (p myComplexTypeOstrzezeniaReqParams) transf(m *map[string]string) {
 	(*m)["apikey"] = p.apikey
 	(*m)["x"] = strconv.FormatFloat(p.x, 'f', 2, 64)
 	(*m)["y"] = strconv.FormatFloat(p.y, 'f', 2, 64)
-}
-
-func authRequest(p AuthReqParams) (*http.Request, error) {
-	m := make(map[string]string)
-	p.print(&m)
-	r, _ := renderAuthRequest(m)
-	return http.NewRequest("POST", "https://burze.dzis.net/soap.php", bytes.NewBuffer(r))
-}
-
-func locationRequest(p LocationReqParams) (*http.Request, error) {
-	m := make(map[string]string)
-	p.print(&m)
-	r, _ := renderLocationRequest(m)
-	return http.NewRequest("POST", "https://burze.dzis.net/soap.php", bytes.NewBuffer(r))
-}
-
-func MyComplexTypeBurzaRequest(p MyComplexTypeBurzaReqParams) (*http.Request, error) {
-	m := make(map[string]string)
-	p.print(&m)
-	r, _ := renderMyComplexTypeBurzaRequest(m)
-	return http.NewRequest("POST", "https://burze.dzis.net/soap.php", bytes.NewBuffer(r))
-}
-
-func MyComplexTypeOstrzezeniaRequest(p MyComplexTypeOstrzezeniaReqParams) (*http.Request, error) {
-	m := make(map[string]string)
-	p.print(&m)
-	r, _ := renderMyComplexTypeOstrzezeniaRequest(m)
-	return http.NewRequest("POST", "https://burze.dzis.net/soap.php", bytes.NewBuffer(r))
 }
 
 func soapRequest(soapReq []byte) []byte {
@@ -95,3 +78,14 @@ func soapRequest(soapReq []byte) []byte {
 	}
 	return body
 }
+
+func renderSoapRequest(req string, params map[string]string) ([]byte, error) {
+	var b bytes.Buffer
+	tpl := template.Must(template.New("request").Parse(req))
+	err := tpl.Execute(&b, &params)
+	if err != nil {
+		return nil, err
+	}
+	return b.Bytes(), nil
+}
+

@@ -1,26 +1,26 @@
 package burzedzisnet
 
-// MyComplexTypeMiejscowosc represents
-type MyComplexTypeMiejscowosc struct {
+// myComplexTypeMiejscowosc represents
+type myComplexTypeMiejscowosc struct {
 	X float64
 	Y float64
 }
 
 // IsSpec ensures that
-func (c MyComplexTypeMiejscowosc) IsSpec() bool {
+func (c myComplexTypeMiejscowosc) IsSpec() bool {
 	return c.X != 0 || c.Y != 0
 }
 
-// MyComplexTypeBurza represents
-type MyComplexTypeBurza struct {
+// myComplexTypeBurza represents
+type myComplexTypeBurza struct {
 	Liczba    int
 	Odleglosc float64
 	Kierunek  string
 	Okres     int
 }
 
-// MyComplexTypeOstrzezenia represents
-type MyComplexTypeOstrzezenia struct {
+// myComplexTypeOstrzezenia represents
+type myComplexTypeOstrzezenia struct {
 	OdDnia      string
 	DoDnia      string
 	Mroz        int
@@ -44,6 +44,6 @@ type MyComplexTypeOstrzezenia struct {
 }
 
 // IsSafe returns
-func (w MyComplexTypeOstrzezenia) IsSafe() bool {
+func (w myComplexTypeOstrzezenia) IsSafe() bool {
 	return w.Mroz+w.Upal+w.Wiatr+w.Opad+w.Burza+w.Traba == 0
 }

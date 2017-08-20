@@ -5,21 +5,21 @@ import (
 )
 
 func apikeyFromEnv() string {
-	return os.Getenv("BURZEDZISNET_apikey")
+	return os.Getenv("BURZEDZISNET_APIKEY")
 }
 
-// Client represents a
-type Client struct {
+// client represents a
+type client struct {
 	apikey string
 }
 
 // NewClient returns
-func NewClient(apikey string) *Client {
-	return &Client{apikey: apikey}
+func NewClient(apiKey string) *client {
+	return &client{apikey: apiKey}
 }
 
 // APIKey returns used API key by the client.
-func (c *Client) APIKey() string {
+func (c *client) APIKey() string {
 	k := (*c).apikey
 	if k == "" {
 		return apikeyFromEnv()
@@ -30,11 +30,9 @@ func (c *Client) APIKey() string {
 // Auth sends a client key and returns true, when the key is valid.
 //
 // Otherwise it returns false
-func (c *Client) Auth() (bool, error) {
-	p := AuthReqParams{apikey: c.APIKey()}
-	pm := make(map[string]string)
-	p.print(&pm)
-	req, err := renderAuthRequest(pm)
+func (c *client) Auth() (bool, error) {
+	p := ptransf(authReqParams{apikey: c.APIKey()})
+	req, err := renderAuthRequest(p)
 	if err != nil {
 		return false, err
 	}
@@ -45,11 +43,9 @@ func (c *Client) Auth() (bool, error) {
 // AuthKey sends a parameter as an API key and returns true, when the key is valid.
 //
 // Otherwise it returns false
-func (c *Client) AuthKey(apikey string) (bool, error) {
-	p := AuthReqParams{apikey: apikey}
-	pm := make(map[string]string)
-	p.print(&pm)
-	req, err := renderAuthRequest(pm)
+func (c *client) AuthKey(apikey string) (bool, error) {
+	p := ptransf(authReqParams{apikey: c.APIKey()})
+	req, err := renderAuthRequest(p)
 	if err != nil {
 		return false, err
 	}
@@ -58,57 +54,50 @@ func (c *Client) AuthKey(apikey string) (bool, error) {
 }
 
 // Locate sends
-func (c *Client) Locate(name string) (MyComplexTypeMiejscowosc, error) {
+func (c *client) Locate(name string) (myComplexTypeMiejscowosc, error) {
 	return c.AuthLocate(name, c.APIKey())
 }
 
 // AuthLocate sends
-// TODO: Handle variadic args to support apikey arg
-func (c *Client) AuthLocate(name string, apikey string) (MyComplexTypeMiejscowosc, error) {
-	p := LocationReqParams{apikey: apikey, name: name}
-	pm := make(map[string]string)
-	p.print(&pm)
-	req, err := renderLocationRequest(pm)
+func (c *client) AuthLocate(name string, apikey string) (myComplexTypeMiejscowosc, error) {
+	p := ptransf(myComplexTypeMiejscowoscReqParams{apikey: apikey, name: name})
+	req, err := renderMyComplexTypeMiejscowoscRequest(p)
 	if err != nil {
-		return MyComplexTypeMiejscowosc{X: 0, Y: 0}, err
+		return myComplexTypeMiejscowosc{X: 0, Y: 0}, err
 	}
 	resp := soapRequest(req)
 	loc := parseLocation(resp)
 	return loc, nil
 }
 
-// MyComplexTypeBurza sends
-func (c *Client) MyComplexTypeBurza(x, y float64, r int) (MyComplexTypeBurza, error) {
+// myComplexTypeBurza sends
+func (c *client) MyComplexTypeBurza(x, y float64, r int) (myComplexTypeBurza, error) {
 	return c.AuthMyComplexTypeBurza(x, y, r, c.APIKey())
 }
 
-// MyComplexTypeBurza
-func (c *Client) AuthMyComplexTypeBurza(x, y float64, r int, apikey string) (MyComplexTypeBurza, error) {
-	p := MyComplexTypeBurzaReqParams{apikey: apikey, x: x, y: y, radius: r}
-	pm := make(map[string]string)
-	p.print(&pm)
-	req, err := renderMyComplexTypeBurzaRequest(pm)
+// myComplexTypeBurza
+func (c *client) AuthMyComplexTypeBurza(x, y float64, r int, apikey string) (myComplexTypeBurza, error) {
+	p := ptransf(myComplexTypeBurzaReqParams{apikey: apikey, x: x, y: y, radius: r})
+	req, err := renderMyComplexTypeBurzaRequest(p)
 	if err != nil {
-		return MyComplexTypeBurza{}, err
+		return myComplexTypeBurza{}, err
 	}
 	resp := soapRequest(req)
 	MyComplexTypeBurza := parseMyComplexTypeBurza(resp)
 	return MyComplexTypeBurza, nil
 }
 
-// MyComplexTypeBurza sends
-func (c *Client) MyComplexTypeOstrzezenia(x, y float64) (MyComplexTypeOstrzezenia, error) {
+// myComplexTypeBurza sends
+func (c *client) MyComplexTypeOstrzezenia(x, y float64) (myComplexTypeOstrzezenia, error) {
 	return c.AuthMyComplexTypeOstrzezenia(x, y, c.APIKey())
 }
 
-// MyComplexTypeBurza
-func (c *Client) AuthMyComplexTypeOstrzezenia(x, y float64, apikey string) (MyComplexTypeOstrzezenia, error) {
-	p := MyComplexTypeOstrzezeniaReqParams{apikey: apikey, x: x, y: y}
-	pm := make(map[string]string)
-	p.print(&pm)
-	req, err := renderMyComplexTypeOstrzezeniaRequest(pm)
+// myComplexTypeBurza
+func (c *client) AuthMyComplexTypeOstrzezenia(x, y float64, apikey string) (myComplexTypeOstrzezenia, error) {
+	p := ptransf(myComplexTypeOstrzezeniaReqParams{apikey: apikey, x: x, y: y})
+	req, err := renderMyComplexTypeOstrzezeniaRequest(p)
 	if err != nil {
-		return MyComplexTypeOstrzezenia{}, err
+		return myComplexTypeOstrzezenia{}, err
 	}
 	resp := soapRequest(req)
 	MyComplexTypeOstrzezenia := parseMyComplexTypeOstrzezenia(resp)
