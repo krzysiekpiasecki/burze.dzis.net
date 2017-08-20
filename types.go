@@ -1,17 +1,17 @@
 package burzedzisnet
 
-// MyComplexTypeMiejscowosc represents a pair of coordinates of a location (DMS).
+// MyComplexTypeMiejscowosc represents
 type MyComplexTypeMiejscowosc struct {
 	X float64
 	Y float64
 }
 
-// IsSpec ensures that the coordinates of a location are specified.
+// IsSpec ensures that
 func (c MyComplexTypeMiejscowosc) IsSpec() bool {
 	return c.X != 0 || c.Y != 0
 }
 
-// MyComplexTypeBurza represents information about a number of lightnings
+// MyComplexTypeBurza represents
 type MyComplexTypeBurza struct {
 	Liczba    int
 	Odleglosc float64
@@ -19,7 +19,7 @@ type MyComplexTypeBurza struct {
 	Okres     int
 }
 
-// MyComplexTypeOstrzezenia represents information about wheater MyComplexTypeOstrzezenia for the given location
+// MyComplexTypeOstrzezenia represents
 type MyComplexTypeOstrzezenia struct {
 	OdDnia      string
 	DoDnia      string
@@ -43,7 +43,7 @@ type MyComplexTypeOstrzezenia struct {
 	TrabaDoDnia string
 }
 
-// IsSafe returns true when no MyComplexTypeOstrzezenias were registered otherwise it resturns false
+// IsSafe returns
 func (w MyComplexTypeOstrzezenia) IsSafe() bool {
 	return w.Mroz+w.Upal+w.Wiatr+w.Opad+w.Burza+w.Traba == 0
 }
