@@ -45,5 +45,5 @@ type MyComplexTypeOstrzezenia struct {
 
 // IsSafe returns true when no MyComplexTypeOstrzezenias were registered otherwise it resturns false
 func (w MyComplexTypeOstrzezenia) IsSafe() bool {
-	return 0 == w.Mroz+w.Upal+w.Wiatr+w.Opad+w.Burza+w.Traba
+	return w.Mroz+w.Upal+w.Wiatr+w.Opad+w.Burza+w.Traba == 0
 }
