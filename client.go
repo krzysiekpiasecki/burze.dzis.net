@@ -10,17 +10,17 @@ func apikeyFromEnv() string {
 
 // client represents a
 type client struct {
-	apikey string
+	apiKey string
 }
 
 // NewClient returns
 func NewClient(apiKey string) *client {
-	return &client{apikey: apiKey}
+	return &client{apiKey: apiKey}
 }
 
 // APIKey returns used API key by the client.
 func (c *client) APIKey() string {
-	k := (*c).apikey
+	k := (*c).apiKey
 	if k == "" {
 		return apikeyFromEnv()
 	}
@@ -48,7 +48,7 @@ func (c *client) MyComplexTypeMiejscowosc(name string) (myComplexTypeMiejscowosc
 		return myComplexTypeMiejscowosc{X: 0, Y: 0}, err
 	}
 	resp := soapRequest(req)
-	loc := parseLocation(resp)
+	loc := parseMyComplexTypeMiejscowosc(resp)
 	return loc, nil
 }
 

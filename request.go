@@ -24,7 +24,7 @@ type authReqParams struct {
 }
 
 func (p authReqParams) transf(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
+	(*m)["apiKey"] = p.apikey
 }
 
 // myComplexTypeMiejscowoscReqParams represents
@@ -34,7 +34,7 @@ type myComplexTypeMiejscowoscReqParams struct {
 }
 
 func (p myComplexTypeMiejscowoscReqParams) transf(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
+	(*m)["apiKey"] = p.apikey
 	(*m)["name"] = p.name
 }
 
@@ -47,7 +47,7 @@ type myComplexTypeBurzaReqParams struct {
 }
 
 func (p myComplexTypeBurzaReqParams) transf(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
+	(*m)["apiKey"] = p.apikey
 	(*m)["x"] = strconv.FormatFloat(p.x, 'f', 2, 64)
 	(*m)["y"] = strconv.FormatFloat(p.y, 'f', 2, 64)
 	(*m)["radius"] = strconv.FormatInt(int64(p.radius), 10)
@@ -61,7 +61,7 @@ type myComplexTypeOstrzezeniaReqParams struct {
 }
 
 func (p myComplexTypeOstrzezeniaReqParams) transf(m *map[string]string) {
-	(*m)["apikey"] = p.apikey
+	(*m)["apiKey"] = p.apikey
 	(*m)["x"] = strconv.FormatFloat(p.x, 'f', 2, 64)
 	(*m)["y"] = strconv.FormatFloat(p.y, 'f', 2, 64)
 }

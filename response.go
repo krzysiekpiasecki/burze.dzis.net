@@ -81,7 +81,7 @@ func parseAuth(response []byte) bool {
 	panic("Parsing SOAP response failure")
 }
 
-func parseLocation(response []byte) myComplexTypeMiejscowosc {
+func parseMyComplexTypeMiejscowosc(response []byte) myComplexTypeMiejscowosc {
 
 	xmlDecoder := xml.NewDecoder(bytes.NewReader(response))
 
