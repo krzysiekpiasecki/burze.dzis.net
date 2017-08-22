@@ -40,27 +40,9 @@ func (c *client) Auth() (bool, error) {
 	return parseAuth(resp), nil
 }
 
-// AuthKey sends a parameter as an API key and returns true, when the key is valid.
-//
-// Otherwise it returns false
-func (c *client) AuthKey(apikey string) (bool, error) {
-	p := ptransf(authReqParams{apikey: c.APIKey()})
-	req, err := renderAuthRequest(p)
-	if err != nil {
-		return false, err
-	}
-	resp := soapRequest(req)
-	return parseAuth(resp), nil
-}
-
-// Locate sends
-func (c *client) Locate(name string) (myComplexTypeMiejscowosc, error) {
-	return c.AuthLocate(name, c.APIKey())
-}
-
-// AuthLocate sends
-func (c *client) AuthLocate(name string, apikey string) (myComplexTypeMiejscowosc, error) {
-	p := ptransf(myComplexTypeMiejscowoscReqParams{apikey: apikey, name: name})
+// MyComplexTypeMiejscowosc sends
+func (c *client) MyComplexTypeMiejscowosc(name string) (myComplexTypeMiejscowosc, error) {
+	p := ptransf(myComplexTypeMiejscowoscReqParams{apikey: c.APIKey(), name: name})
 	req, err := renderMyComplexTypeMiejscowoscRequest(p)
 	if err != nil {
 		return myComplexTypeMiejscowosc{X: 0, Y: 0}, err
@@ -70,14 +52,9 @@ func (c *client) AuthLocate(name string, apikey string) (myComplexTypeMiejscowos
 	return loc, nil
 }
 
-// myComplexTypeBurza sends
+// MyComplexTypeBurza sends
 func (c *client) MyComplexTypeBurza(x, y float64, r int) (myComplexTypeBurza, error) {
-	return c.AuthMyComplexTypeBurza(x, y, r, c.APIKey())
-}
-
-// myComplexTypeBurza
-func (c *client) AuthMyComplexTypeBurza(x, y float64, r int, apikey string) (myComplexTypeBurza, error) {
-	p := ptransf(myComplexTypeBurzaReqParams{apikey: apikey, x: x, y: y, radius: r})
+	p := ptransf(myComplexTypeBurzaReqParams{apikey: c.APIKey(), x: x, y: y, radius: r})
 	req, err := renderMyComplexTypeBurzaRequest(p)
 	if err != nil {
 		return myComplexTypeBurza{}, err
@@ -87,14 +64,9 @@ func (c *client) AuthMyComplexTypeBurza(x, y float64, r int, apikey string) (myC
 	return MyComplexTypeBurza, nil
 }
 
-// myComplexTypeBurza sends
+// MyComplexTypeOstrzezenia sends
 func (c *client) MyComplexTypeOstrzezenia(x, y float64) (myComplexTypeOstrzezenia, error) {
-	return c.AuthMyComplexTypeOstrzezenia(x, y, c.APIKey())
-}
-
-// myComplexTypeBurza
-func (c *client) AuthMyComplexTypeOstrzezenia(x, y float64, apikey string) (myComplexTypeOstrzezenia, error) {
-	p := ptransf(myComplexTypeOstrzezeniaReqParams{apikey: apikey, x: x, y: y})
+	p := ptransf(myComplexTypeOstrzezeniaReqParams{apikey: c.APIKey(), x: x, y: y})
 	req, err := renderMyComplexTypeOstrzezeniaRequest(p)
 	if err != nil {
 		return myComplexTypeOstrzezenia{}, err

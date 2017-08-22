@@ -125,7 +125,7 @@ func main() {
 
 	client := burzedzisnet.NewClient(*apiKey)
 
-	loc, _ := client.Locate(os.Args[1])
+	loc, _ := client.MyComplexTypeMiejscowosc(os.Args[1])
 	MyComplexTypeBurza, _ := client.MyComplexTypeBurza(loc.X, loc.Y, 25)
 	warn, _ := client.MyComplexTypeOstrzezenia(loc.X, loc.Y)
 	fmt.Println(loc)
