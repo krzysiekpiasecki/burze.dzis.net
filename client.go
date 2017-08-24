@@ -18,60 +18,40 @@ func NewClient(apiKey string) *client {
 	return &client{apiKey: apiKey}
 }
 
-// APIKey returns used API key by the client.
-func (c *client) APIKey() string {
-	k := (*c).apiKey
-	if k == "" {
-		return apikeyFromEnv()
-	}
-	return k
-}
-
-// Auth sends a client key and returns true, when the key is valid.
+// APIKey sends a client key and returns true, when the key is valid.
 //
 // Otherwise it returns false
-func (c *client) Auth() (bool, error) {
-	p := ptransf(authReqParams{apikey: c.APIKey()})
-	req, err := renderAuthRequest(p)
+func (c *client) APIKey() (bool, error) {
+	req, err := renderAPIKeyRequest(apiKeyReqParams{apikey: c.apiKey}.transf())
 	if err != nil {
 		return false, err
 	}
-	resp := soapRequest(req)
-	return parseAuth(resp), nil
+	return parseAuth(doSoapRequest(req)), nil
 }
 
 // MyComplexTypeMiejscowosc sends
 func (c *client) MyComplexTypeMiejscowosc(name string) (myComplexTypeMiejscowosc, error) {
-	p := ptransf(myComplexTypeMiejscowoscReqParams{apikey: c.APIKey(), name: name})
-	req, err := renderMyComplexTypeMiejscowoscRequest(p)
+	req, err := renderMyComplexTypeMiejscowoscRequest(myComplexTypeMiejscowoscReqParams{apikey: c.apiKey, name: name}.transf())
 	if err != nil {
 		return myComplexTypeMiejscowosc{X: 0, Y: 0}, err
 	}
-	resp := soapRequest(req)
-	loc := parseMyComplexTypeMiejscowosc(resp)
-	return loc, nil
+	return parseMyComplexTypeMiejscowosc(doSoapRequest(req)), nil
 }
 
 // MyComplexTypeBurza sends
 func (c *client) MyComplexTypeBurza(x, y float64, r int) (myComplexTypeBurza, error) {
-	p := ptransf(myComplexTypeBurzaReqParams{apikey: c.APIKey(), x: x, y: y, radius: r})
-	req, err := renderMyComplexTypeBurzaRequest(p)
+	req, err := renderMyComplexTypeBurzaRequest(myComplexTypeBurzaReqParams{apikey: c.apiKey, x: x, y: y, radius: r}.transf())
 	if err != nil {
 		return myComplexTypeBurza{}, err
 	}
-	resp := soapRequest(req)
-	MyComplexTypeBurza := parseMyComplexTypeBurza(resp)
-	return MyComplexTypeBurza, nil
+	return parseMyComplexTypeBurza(doSoapRequest(req)), nil
 }
 
 // MyComplexTypeOstrzezenia sends
 func (c *client) MyComplexTypeOstrzezenia(x, y float64) (myComplexTypeOstrzezenia, error) {
-	p := ptransf(myComplexTypeOstrzezeniaReqParams{apikey: c.APIKey(), x: x, y: y})
-	req, err := renderMyComplexTypeOstrzezeniaRequest(p)
+	req, err := renderMyComplexTypeOstrzezeniaRequest(myComplexTypeOstrzezeniaReqParams{apikey: c.apiKey, x: x, y: y}.transf())
 	if err != nil {
 		return myComplexTypeOstrzezenia{}, err
 	}
-	resp := soapRequest(req)
-	MyComplexTypeOstrzezenia := parseMyComplexTypeOstrzezenia(resp)
-	return MyComplexTypeOstrzezenia, nil
+	return parseMyComplexTypeOstrzezenia(doSoapRequest(req)), nil
 }
