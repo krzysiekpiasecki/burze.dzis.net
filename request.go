@@ -44,6 +44,13 @@ type myComplexTypeBurzaReqParams struct {
 	radius int
 }
 
+// myListaMiejscowosciParams represents
+type myListaMiejscowosciParams struct {
+	apikey  string
+	name    string
+	country string
+}
+
 func (p apiKeyReqParams) transf() (m map[string]string) {
 	m = make(map[string]string)
 	m["apiKey"] = p.apikey
@@ -71,6 +78,14 @@ func (p myComplexTypeOstrzezeniaReqParams) transf() (m map[string]string) {
 	m["apiKey"] = p.apikey
 	m["x"] = strconv.FormatFloat(p.x, 'f', 2, 64)
 	m["y"] = strconv.FormatFloat(p.y, 'f', 2, 64)
+	return
+}
+
+func (p myComplexTypeMiejscowoscListReqParams) transf() (m map[string]string) {
+	m = make(map[string]string)
+	m["apiKey"] = p.apikey
+	m["name"] = p.name
+	m["country"] = p.country
 	return
 }
 

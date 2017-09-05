@@ -48,6 +48,7 @@ func (w myComplexTypeOstrzezenia) IsSafe() bool {
 	return w.Mroz+w.Upal+w.Wiatr+w.Opad+w.Burza+w.Traba == 0
 }
 
+
 // client represents a
 type client struct {
 	apiKey string
@@ -94,4 +95,14 @@ func (c *client) MyComplexTypeOstrzezenia(x, y float64) (myComplexTypeOstrzezeni
 		return myComplexTypeOstrzezenia{}, err
 	}
 	return parseMyComplexTypeOstrzezenia(doSoapRequest(req)), nil
+}
+
+// MyComplexTypeOstrzezenia sends
+func (c *client) LookupNames(name, country string) ([]string, error) {
+	req, err := renderListaMiejscowosciRequest(myComplexTypeMiejscowoscListReqParams{apikey: c.apiKey, name: name, country: country}.transf())
+	if err != nil {
+		return make([]string, 0), err
+	}
+
+	return parseLookupNameResponse(doSoapRequest(req)), nil
 }

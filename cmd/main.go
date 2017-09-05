@@ -128,6 +128,8 @@ func main() {
 	loc, _ := client.MyComplexTypeMiejscowosc(os.Args[1])
 	MyComplexTypeBurza, _ := client.MyComplexTypeBurza(loc.X, loc.Y, 25)
 	warn, _ := client.MyComplexTypeOstrzezenia(loc.X, loc.Y)
+	locList, _ := client.LookupNames(os.Args[1], "")
+
 	fmt.Println(loc)
 	fmt.Println(MyComplexTypeBurza)
 
@@ -136,6 +138,15 @@ func main() {
 	} else {
 		fmt.Println("No weather alerts!")
 	}
+
+
+	if 0 < len(locList) {
+		fmt.Printf("\nLookup result for a location: '%s':",os.Args[1])
+		for _, v := range locList {
+			fmt.Printf("\n%s", v)
+		}
+	}
+	fmt.Println()
 
 }
 

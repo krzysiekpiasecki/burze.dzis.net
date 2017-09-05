@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"encoding/json"
 )
 
 func makePanic(xmlDecoder *xml.Decoder) {
@@ -321,4 +322,48 @@ func parseMyComplexTypeOstrzezenia(response []byte) myComplexTypeOstrzezenia {
 	}
 
 	return MyComplexTypeOstrzezenia
+}
+
+func parseLookupNameResponse(response []byte) []string {
+
+	xmlDecoder := xml.NewDecoder(bytes.NewReader(response))
+
+	last := ""
+
+	for {
+		tok, err := xmlDecoder.Token()
+		if tok == nil {
+			break
+		}
+		if err != nil {
+			fmt.Printf("Parsing SOAP response failure %s", err)
+			os.Exit(1)
+		}
+
+		switch se := tok.(type) {
+		case xml.StartElement:
+			{
+				last = se.Name.Local
+			}
+		case xml.CharData:
+			{
+				if last == "return" {
+					r := make([]interface{}, 0)
+					if err := json.Unmarshal(se, &r); err != nil {
+						fmt.Printf("\nERROR: %s", err)
+						return make([]string, 0)
+					}
+					names := make([]string, 0)
+					for _, v := range r[1].([]interface{}) {
+						names = append(names, v.(string))
+					}
+
+					return names
+				}
+			}
+		}
+	}
+
+	panic("Parsing SOAP response failure")
+
 }
